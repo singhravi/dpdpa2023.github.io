@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DPDP Act 2023 - Complete 77 Slides</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 10px;
+      }
+      .header {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        margin-bottom: 15px;
+        text-align: center;
+      }
+      .header h1 {
+        color: #667eea;
+        font-size: 1.8em;
+        margin-bottom: 5px;
+      }
+      .controls {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .chapter-nav {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+      }
+      .chapter-btn {
+        padding: 8px 12px;
+        background: #f0f4ff;
+        border: 2px solid #667eea;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        color: #667eea;
+        transition: all 0.3s;
+      }
+      .chapter-btn:hover {
+        background: #667eea;
+        color: white;
+      }
+      .chapter-btn.active {
+        background: #667eea;
+        color: white;
+      }
+      .nav-btn {
+        background: #667eea;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s;
+      }
+      .nav-btn:hover {
+        background: #764ba2;
+      }
+      .nav-btn:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+      .progress-container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .slide-display {
+        text-align: center;
+        font-size: 24px;
+        font-weight: 700;
+        color: #667eea;
+        margin-bottom: 15px;
+        letter-spacing: 2px;
+        transition: all 0.3s ease;
+      }
+      .slide-display span {
+        color: #764ba2;
+        font-size: 28px;
+        display: inline-block;
+        transition: transform 0.3s ease;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+      .progress-bar {
+        background: #e0e0e0;
+        height: 30px;
+        border-radius: 15px;
+        overflow: hidden;
+      }
+      .progress-fill {
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        height: 100%;
+        transition: width 0.5s;
+      }
+      .slide-container {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        min-height: 500px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+      .slide h2 {
+        color: #667eea;
+        font-size: 1.8em;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #667eea;
+      }
+      .slide h3 {
+        color: #764ba2;
+        font-size: 1.3em;
+        margin: 15px 0 10px 0;
+      }
+      .slide ul {
+        margin-left: 20px;
+        line-height: 1.8;
+      }
+      .slide p {
+        line-height: 1.6;
+        margin: 10px 0;
+      }
+      .highlight-box {
+        background: #fff3cd;
+        border-left: 5px solid #ffc107;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 5px;
+      }
+      .info-box {
+        background: #d1ecf1;
+        border-left: 5px solid #17a2b8;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 5px;
+      }
+      .success-box {
+        background: #d4edda;
+        border-left: 5px solid #28a745;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 5px;
+      }
+      .danger-box {
+        background: #f8d7da;
+        border-left: 5px solid #dc3545;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 5px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        font-size: 0.9em;
+      }
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ddd;
+      }
+      th {
+        background: #667eea;
+        color: white;
+        font-weight: 600;
+      }
+      tr:nth-child(even) {
+        background: #f8f9fa;
+      }
+      .timer {
+        background: white;
+        padding: 8px 15px;
+        border-radius: 8px;
+        font-weight: 600;
+        color: #667eea;
+        font-size: 14px;
+      }
+      @media (max-width: 768px) {
+        .slide-container {
+          padding: 20px;
+        }
+        .controls {
+          flex-direction: column;
+        }
+        table {
+          font-size: 0.8em;
+        }
+        .slide-counter {
+          font-size: 18px;
+          padding: 12px 20px;
+          min-width: 100px;
+        }
+        .slide-display {
+          font-size: 20px;
+        }
+        .slide-display span {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>📜 DPDP Act 2023 - Complete Training (77 Slides)</h1>
+      <p>Digital Personal Data Protection Act - Full Chapter Coverage</p>
+    </div>
+    <div class="controls">
+      <div class="chapter-nav">
+        <button class="chapter-btn active" onclick="jumpTo(0)">Start</button>
+        <button class="chapter-btn" onclick="jumpTo(1)">Ch I</button>
+        <button class="chapter-btn" onclick="jumpTo(9)">Ch II</button>
+        <button class="chapter-btn" onclick="jumpTo(23)">Ch III</button>
+        <button class="chapter-btn" onclick="jumpTo(32)">Ch IV</button>
+        <button class="chapter-btn" onclick="jumpTo(39)">Ch V</button>
+        <button class="chapter-btn" onclick="jumpTo(46)">Practice</button>
+      </div>
+      <div class="timer" id="timer">00:00:00</div>
+      <div style="display: flex; gap: 10px">
+        <button class="nav-btn" onclick="prev()" id="prevBtn">← Prev</button>
+        <button class="nav-btn" onclick="next()" id="nextBtn">Next →</button>
+      </div>
+    </div>
+    <div class="progress-container">
+      <div class="slide-display">
+        Slide: <span id="slideDisplay">0/76</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress" style="width: 0%"></div>
+      </div>
+    </div>
+    <div class="slide-container" id="content"></div>
+    <script>
+      const slides = [
+        // Slide 0
+        '<h2>DPDP Act 2023 - Complete Training</h2><div style="text-align:center;margin-top:80px;"><h3 style="color:#667eea;font-size:2em;">Digital Personal Data Protection Act, 2023</h3><p style="font-size:1.4em;margin-top:30px;">Complete Chapter-wise Training - 77 Slides</p><div class="info-box" style="margin-top:50px;text-align:left;"><strong>📚 Full Coverage:</strong><ul><li>Chapter I: Preliminary (Sections 1-3) - 8 slides</li><li>Chapter II: Obligations (Sections 4-10) - 14 slides</li><li>Chapter III: Rights & Duties (Sections 11-15) - 9 slides</li><li>Chapter IV: Special Provisions (Sections 16-17) - 7 slides</li><li>Chapter V: Data Protection Board (Sections 18-22) - 7 slides</li><li>Practice, Case Studies & Assessment - 32 slides</li></ul></div></div>',
+
+        // CHAPTER I (Slides 1-8)
+        '<h2>Chapter I: Preliminary</h2><h3>Sections 1-3 | Duration: 15 minutes</h3><div class="highlight-box"><strong>Learning Objectives:</strong><ul><li>Understand short title and commencement</li><li>Master all key definitions</li><li>Know application scope</li></ul></div><h3>Sections Covered:</h3><ul><li>Section 1: Short title, commencement</li><li>Section 2: All definitions (a-s)</li><li>Section 3: Application and territorial scope</li></ul>',
+
+        '<h2>Section 1: Short Title & Commencement</h2><div class="success-box"><strong>The Digital Personal Data Protection Act, 2023</strong><p>Act No. 22 of 2023 | Presidential Assent: August 11, 2023</p></div><h3>Implementation Status</h3><table><tr><th>Status</th><th>Provisions</th><th>Date</th></tr><tr><td>✅ Notified</td><td>Data Protection Board establishment</td><td>November 13, 2025</td></tr><tr><td>⏳ Pending</td><td>Main provisions (consent, obligations, rights)</td><td>Expected by May 2027</td></tr></table><div class="info-box"><strong>What this means:</strong> Board operational. Main compliance obligations awaiting notification. Prepare now!</div>',
+
+        '<h2>Section 2: Personal Data Defined</h2><div class="highlight-box"><strong>Definition:</strong> Any data about an individual who is identifiable by or in relation to such data</div><h3>Examples of Personal Data:</h3><table><tr><th>Category</th><th>Examples</th></tr><tr><td><strong>Identification Data</strong></td><td>Name, Aadhaar, PAN, Passport, Voter ID</td></tr><tr><td><strong>Contact Data</strong></td><td>Phone, Email, Postal address</td></tr><tr><td><strong>Financial Data</strong></td><td>Bank account, Credit card, Income details</td></tr><tr><td><strong>Biometric Data</strong></td><td>Fingerprints, Iris scan, Face recognition</td></tr><tr><td><strong>Digital Identifiers</strong></td><td>IP address, Device ID, Location data</td></tr></table><div class="info-box"><strong>Digital Personal Data:</strong> Personal data in digital form</div>',
+
+        '<h2>Section 2: The Key Players</h2><h3>🎯 Data Principal = THE CITIZEN</h3><div class="success-box"><strong>WHO:</strong> Individual to whom personal data relates<br><strong>REFERRED AS:</strong> "She" in the Act<br><strong>ROLE:</strong> Has RIGHTS (access, correct, erase, complain)</div><h3>🏢 Data Fiduciary = YOUR DEPARTMENT</h3><div class="danger-box"><strong>WHO:</strong> Determines purpose & means of processing<br><strong>ROLE:</strong> Has OBLIGATIONS (consent, security, breach notification)<br><strong>LIABILITY:</strong> Up to ₹250 crores for violations<br><strong>DECIDES:</strong> WHY and HOW to process data</div><div class="highlight-box"><strong>⚠️ Remember:</strong> YOU are Data Fiduciary. Citizens are Data Principals. Greater power = Greater responsibility!</div>',
+
+        '<h2>Section 2: Data Processor & Processing</h2><h3>⚙️ Data Processor</h3><div class="info-box"><strong>Definition:</strong> Processes data on behalf of Data Fiduciary<br><strong>Examples:</strong> NIC, IT vendors, cloud providers, BPO services<br><strong>⚠️ CRITICAL:</strong> YOU remain responsible even if processor fails!</div><h3>📝 Processing</h3><p><strong>Definition:</strong> Any operation on digital personal data</p><table><tr><th>Operation</th><th>Examples</th></tr><tr><td>Collection</td><td>Form submission, biometric capture</td></tr><tr><td>Storage</td><td>Saving in servers, cloud, backups</td></tr><tr><td>Use</td><td>Verification, analysis, decisions</td></tr><tr><td>Disclosure/Sharing</td><td>Sending to other departments</td></tr><tr><td>Erasure</td><td>Deletion, destruction</td></tr></table>',
+
+        '<h2>Section 2: Consent - The Gold Standard</h2><h3>Valid Consent Must Be:</h3><table><tr><th>Element</th><th>Meaning</th><th>Example</th></tr><tr><td><strong>FREE</strong></td><td>Voluntary, no coercion</td><td>✓ Can refuse<br>✗ "Provide or lose benefit"</td></tr><tr><td><strong>SPECIFIC</strong></td><td>For each purpose</td><td>✓ Separate for email, SMS<br>✗ "For all purposes"</td></tr><tr><td><strong>INFORMED</strong></td><td>Clear explanation</td><td>✓ Plain language notice<br>✗ Complex legal text</td></tr><tr><td><strong>UNCONDITIONAL</strong></td><td>Not bundled</td><td>✓ Can use without consent<br>✗ Must consent to access</td></tr><tr><td><strong>UNAMBIGUOUS</strong></td><td>Clear action</td><td>✓ User clicks checkbox<br>✗ Pre-ticked box</td></tr></table><div class="danger-box"><strong>❌ Invalid:</strong> Pre-ticked boxes, implied from silence, bundled with service</div>',
+
+        '<h2>Section 2: Special Categories</h2><h3>👶 Child (Below 18 years)</h3><div class="danger-box"><strong>Requirements:</strong><ul><li>Verifiable parental consent mandatory</li><li>Age verification needed</li><li>Parent identity must be verified</li></ul><strong>Prohibited:</strong><ul><li>❌ Tracking behavior</li><li>❌ Profiling/monitoring</li><li>❌ Targeted advertising</li></ul><strong>Penalty:</strong> Up to ₹250 crores</div><h3>⚡ Significant Data Fiduciary (SDF)</h3><div class="info-box"><strong>Who:</strong> Notified by govt (volume, sensitivity, impact)<br><strong>Extra Duties:</strong> Appoint DPO, DPIA, audits, enhanced security</div>',
+
+        '<h2>Section 3: Application of the Act</h2><h3>📍 When Does Act Apply?</h3><div class="success-box"><strong>1. Processing WITHIN INDIA</strong><br>All digital personal data processing in India, regardless of Data Principal location<br><br><strong>2. Processing OUTSIDE INDIA</strong><br>If offering goods/services to Data Principals in India</div><h3>❌ Exclusions (NOT Covered):</h3><ul><li>Personal/domestic purposes by individuals</li><li>Publicly available personal data</li><li>Data made public by Data Principal</li><li>Non-digital data never digitized</li></ul><div class="highlight-box"><strong>🎯 Takeaway:</strong> If you process digital personal data of individuals in India for official purposes, Act applies. No exceptions!</div>',
+
+        // CHAPTER II (Slides 9-22)
+        '<h2>Chapter II: Obligations of Data Fiduciary</h2><h3>Sections 4-10 | Duration: 60 minutes</h3><div class="danger-box"><strong>⚠️ MOST CRITICAL CHAPTER!</strong><br>YOUR obligations as Data Fiduciary. Non-compliance = ₹250 crores penalty</div><h3>7 Sections:</h3><table><tr><th>Section</th><th>Topic</th></tr><tr><td>4</td><td>Notice to Data Principal</td></tr><tr><td>5</td><td>Obtaining Consent</td></tr><tr><td>6</td><td>Consent Manager</td></tr><tr><td>7</td><td>Legitimate Uses (8 grounds)</td></tr><tr><td>8</td><td>General Obligations (7 duties)</td></tr><tr><td>9</td><td>Data Processor Obligations</td></tr><tr><td>10</td><td>Significant Data Fiduciary</td></tr></table>',
+
+        '<h2>Section 4: Notice to Data Principal</h2><h3>When Notice Required</h3><div class="highlight-box"><strong>Timing:</strong> Before or at time of seeking consent</div><h3>What Notice Must Contain:</h3><table><tr><th>Information</th><th>Example</th></tr><tr><td>Personal data collected</td><td>"Name, email, phone, address, Aadhaar"</td></tr><tr><td>Purpose of processing</td><td>"For scholarship application processing"</td></tr><tr><td>Rights of Data Principal</td><td>"You can access, correct, erase data"</td></tr><tr><td>How to exercise rights</td><td>"Contact: grievance@dept.gov.in"</td></tr><tr><td>Grievance mechanism</td><td>"Submit at www.dept.gov.in/grievance"</td></tr></table><h3>Language Requirements:</h3><ul><li>English OR any of 22 scheduled languages</li><li>Clear, plain, easily understandable</li><li>No complex legal jargon</li></ul>',
+
+        '<h2>Section 5: Obtaining Consent</h2><h3>General Rule</h3><div class="success-box"><strong>Process only for lawful purpose with consent of Data Principal</strong></div><h3>Consent Process:</h3><ol><li>Provide notice (Section 4)</li><li>Request consent for specific purpose</li><li>Ensure 5 elements (free, specific, informed, unconditional, unambiguous)</li><li>Obtain clear affirmative action</li><li>Record consent with timestamp</li><li>Provide easy withdrawal mechanism</li></ol><div class="danger-box"><strong>❌ Invalid Consent:</strong><ul><li>Pre-ticked boxes</li><li>Implied from silence</li><li>Bundling unnecessary data</li><li>No withdrawal option</li></ul></div>',
+
+        '<h2>Section 6: Consent Manager</h2><h3>What is Consent Manager?</h3><div class="info-box"><strong>Definition:</strong> Registered intermediary enabling Data Principal to give, manage, review and withdraw consent through interoperable platform</div><h3>Key Features:</h3><ul><li>Single platform for multiple consents</li><li>Review all consents given</li><li>Easy consent withdrawal</li><li>Must register with Board</li><li>Interoperable with other Consent Managers</li><li>Accountable to Data Principal</li></ul><h3>For Government:</h3><div class="success-box">While optional, Consent Managers can simplify citizen experience across multiple government services. Consider integrating when available.</div>',
+
+        "<h2>Section 7: Legitimate Uses - Part 1</h2><h3>8 Grounds for Processing WITHOUT Consent:</h3><table><tr><th>Ground</th><th>When Applicable</th></tr><tr><td><strong>1. Voluntary Disclosure</strong></td><td>Data Principal voluntarily provides data for specified purpose</td></tr><tr><td><strong>2. State Functions</strong></td><td>Functions of State authorized by law (services, benefits, licenses, permits, certificates)</td></tr><tr><td><strong>3. Legal Compliance</strong></td><td>Court judgments, orders, decrees, or compliance with any law</td></tr><tr><td><strong>4. Medical Emergency</strong></td><td>To provide medical treatment or health services during emergency</td></tr></table>",
+
+        '<h2>Section 7: Legitimate Uses - Part 2</h2><h3>Remaining 4 Grounds:</h3><table><tr><th>Ground</th><th>When Applicable</th></tr><tr><td><strong>5. Public Health</strong></td><td>Epidemic, outbreak of disease, public health emergency</td></tr><tr><td><strong>6. Disaster Management</strong></td><td>Providing assistance/service during disaster or breakdown of public order</td></tr><tr><td><strong>7. Employment</strong></td><td>For recruitment, employment terms and benefits (if authorized by law)</td></tr><tr><td><strong>8. Reasonable Purposes</strong></td><td>Safeguarding State, prevention/detection/investigation of offence, legal proceedings, debt recovery, whistleblowing</td></tr></table><div class="danger-box"><strong>⚠️ Important:</strong> Even without consent, all other obligations apply!</div>',
+
+        '<h2>Section 7: Examples</h2><h3>Government Scenarios:</h3><div class="success-box"><strong>✅ Passport Application</strong><br>Legitimate Use: State function (Passports Act)<br>Consent: Not needed beyond application<br></div><div class="success-box"><strong>✅ COVID Contact Tracing</strong><br>Legitimate Use: Public health emergency<br>Consent: Not needed<br></div><div class="success-box"><strong>✅ Pension Disbursal</strong><br>Legitimate Use: State function (providing benefits)<br>Consent: Not needed<br></div><div class="success-box"><strong>✅ Crime Investigation</strong><br>Legitimate Use: Prevention/detection of offence<br>Consent: Not needed<br></div>',
+
+        '<h2>Section 8: General Obligations Overview</h2><h3>7 Core Duties:</h3><table><tr><th>#</th><th>Obligation</th><th>Penalty</th></tr><tr><td>1</td><td>Lawful processing & purpose limitation</td><td>₹200cr</td></tr><tr><td>2</td><td>Collection limitation (data minimization)</td><td>₹200cr</td></tr><tr><td>3</td><td>Data accuracy & completeness</td><td>₹200cr</td></tr><tr><td>4</td><td>Storage limitation</td><td>₹200cr</td></tr><tr><td>5</td><td><strong>Security safeguards</strong></td><td><strong>₹250cr</strong></td></tr><tr><td>6</td><td><strong>Breach notification</strong></td><td><strong>₹250cr</strong></td></tr><tr><td>7</td><td>Facilitate rights exercise</td><td>₹200cr</td></tr></table><div class="danger-box"><strong>🔴 HIGHEST RISK:</strong> Security & Breach Notification</div>',
+
+        '<h2>Section 8: Obligation 1 & 2</h2><h3>1. Lawful Processing & Purpose Limitation</h3><ul><li>Process only for lawful purposes</li><li>Use data only for specified purpose</li><li>No repurposing without fresh consent</li><li>Document purpose clearly</li></ul><h3>2. Collection Limitation (Data Minimization)</h3><ul><li>Collect only necessary personal data</li><li>Avoid excessive data collection</li><li>Regularly review what you collect</li><li>Remove unnecessary fields from forms</li></ul><div class="highlight-box"><strong>Example:</strong> Birth certificate needs child details, parents names. Does NOT need grandparents Aadhaar, income certificate, caste certificate!</div>',
+
+        "<h2>Section 8: Obligation 3 & 4</h2><h3>3. Data Accuracy & Completeness</h3><ul><li>Ensure accuracy of all data</li><li>Keep data up-to-date</li><li>Implement verification mechanisms</li><li>Correct inaccuracies promptly (15 days)</li><li>Update when informed of changes</li></ul><h3>4. Storage Limitation</h3><ul><li>Retain data only as long as necessary</li><li>Define retention periods for each category</li><li>Delete data when purpose fulfilled</li><li>Implement automated deletion where possible</li></ul><table><tr><th>Data Type</th><th>Retention Period</th></tr><tr><td>Application data</td><td>7 years after completion</td></tr><tr><td>Financial records</td><td>8 years (as per Income Tax)</td></tr><tr><td>Employee data</td><td>Lifetime + 7 years after retirement</td></tr></table>",
+
+        '<h2>Section 8: Obligation 5 - Security Safeguards</h2><h3>Technical Measures:</h3><ul><li>Encryption (data at rest and in transit)</li><li>Access controls (RBAC, MFA)</li><li>Firewalls and intrusion detection</li><li>Regular security patches</li><li>Secure backup and recovery</li><li>24/7 monitoring (SIEM)</li><li>Vulnerability assessments</li></ul><h3>Organizational Measures:</h3><ul><li>Background verification of staff</li><li>Confidentiality agreements</li><li>Need-to-know access principle</li><li>Security training (annual)</li><li>Physical security of premises</li><li>Clean desk policy</li></ul><div class="danger-box"><strong>⚠️ Failure = Penalty up to ₹250 crores</strong></div>',
+
+        '<h2>Section 8: Obligation 6 - Breach Notification</h2><h3>What is a Breach?</h3><ul><li>Unauthorized access (hacking)</li><li>Unauthorized disclosure (wrong email)</li><li>Unauthorized acquisition (theft)</li><li>Loss of personal data (deleted)</li></ul><h3>Critical Timelines:</h3><table><tr><th>To Whom</th><th>Timeline</th><th>Details</th></tr><tr><td><strong>CERT-In</strong></td><td><strong>6 hours</strong></td><td>Nature, systems affected, actions taken</td></tr><tr><td><strong>Board</strong></td><td><strong>72 hours</strong></td><td>Description, scope, consequences, remediation</td></tr><tr><td><strong>Citizens</strong></td><td><strong>Immediately</strong></td><td>If breach likely to cause harm</td></tr></table><div class="danger-box"><strong>⚠️ Failure to notify = ₹250 crores penalty</strong></div>',
+
+        "<h2>Section 8: Breach Response Process</h2><h3>Hour 0-6: Immediate Actions</h3><ol><li>Detect and verify breach</li><li>Contain immediately (isolate systems)</li><li>Preserve evidence</li><li>Notify CERT-In</li><li>Alert senior management</li></ol><h3>Hour 6-72: Assessment & Notification</h3><ol><li>Determine scope and scale</li><li>Identify affected data and individuals</li><li>Assess potential harm</li><li>Notify Data Protection Board</li><li>Notify affected citizens (if high risk)</li></ol><h3>Ongoing: Remediation</h3><ol><li>Forensic investigation</li><li>Root cause analysis</li><li>Implement fixes</li><li>Strengthen security</li><li>Staff retraining</li></ol>",
+
+        '<h2>Section 9: Data Processor Obligations</h2><h3>When Engaging Third-Party Processors:</h3><div class="info-box"><strong>Remember:</strong> YOU remain responsible even if processor fails!</div><h3>Requirements:</h3><table><tr><th>Stage</th><th>Actions</th></tr><tr><td><strong>Before</strong></td><td>Due diligence, Security assessment, Background checks</td></tr><tr><td><strong>Contract</strong></td><td>Scope defined, Security obligations, Breach notification clause, Audit rights, Liability clauses</td></tr><tr><td><strong>During</strong></td><td>Regular monitoring, Compliance audits, Performance reviews</td></tr><tr><td><strong>Termination</strong></td><td>Data return/deletion, Certificate of destruction, Final audit</td></tr></table>',
+
+        '<h2>Section 10: Significant Data Fiduciary</h2><h3>Who Gets Notified as SDF?</h3><div class="highlight-box">Based on:<ul><li>Volume of personal data processed</li><li>Sensitivity of personal data</li><li>Risk to rights of Data Principals</li><li>Impact on sovereignty and integrity</li><li>Risk to electoral democracy</li></ul></div><h3>Additional Obligations:</h3><table><tr><th>Obligation</th><th>Details</th></tr><tr><td><strong>1. Data Protection Officer</strong></td><td>Must be based in India, Contact details published</td></tr><tr><td><strong>2. Independent Auditor</strong></td><td>Annual assessment, Report to Board</td></tr><tr><td><strong>3. DPIA</strong></td><td>Before high-risk processing, Document risks</td></tr><tr><td><strong>4. Periodic Audits</strong></td><td>Regular compliance checks</td></tr></table>',
+
+        // CHAPTER III (Slides 23-31)
+        '<h2>Chapter III: Rights & Duties of Data Principal</h2><h3>Sections 11-15 | Duration: 45 minutes</h3><div class="success-box"><strong>What Citizens Can Demand From You</strong></div><h3>5 Key Rights:</h3><table><tr><th>Right</th><th>Timeline</th></tr><tr><td>1. Access information</td><td>30 days</td></tr><tr><td>2. Correction</td><td>15 working days</td></tr><tr><td>3. Erasure</td><td>Reasonable period</td></tr><tr><td>4. Grievance redressal</td><td>7 days ack, 30 days resolve</td></tr><tr><td>5. Nominate</td><td>Maintain records</td></tr></table><div class="danger-box"><strong>⚠️ Missing timelines = Penalties</strong></div>',
+
+        '<h2>Section 11: Right to Access</h2><h3>What Data Principal Can Request:</h3><ol><li>Summary of personal data being processed</li><li>Processing activities undertaken</li><li>Identities of other Data Fiduciaries/Processors data shared with</li><li>Any other prescribed information</li></ol><h3>How to Respond:</h3><table><tr><th>Step</th><th>Action</th><th>Timeline</th></tr><tr><td>1</td><td>Receive request</td><td>Day 0</td></tr><tr><td>2</td><td>Verify identity</td><td>Days 1-3</td></tr><tr><td>3</td><td>Acknowledge</td><td>Within 7 days</td></tr><tr><td>4</td><td>Search & compile</td><td>Days 4-25</td></tr><tr><td>5</td><td>Review & respond</td><td><strong>Within 30 days</strong></td></tr></table><div class="info-box"><strong>Must be:</strong> Free of charge, Accessible format</div>',
+
+        '<h2>Section 11: Right to Correction</h2><h3>When This Right Applies:</h3><ul><li>Data is inaccurate</li><li>Data is incomplete</li><li>Data is outdated/out-of-date</li></ul><h3>Correction Process:</h3><table><tr><th>Step</th><th>Timeline</th></tr><tr><td>Receive request with supporting docs</td><td>Day 0</td></tr><tr><td>Verify identity & assess claim</td><td>Days 1-7</td></tr><tr><td>Make correction across all systems</td><td>Days 8-12</td></tr><tr><td>Notify third parties if data shared</td><td>Days 13-14</td></tr><tr><td>Confirm to Data Principal</td><td><strong>Within 15 days</strong></td></tr></table><div class="highlight-box"><strong>Example:</strong> Address updated → Update in database + Notify all departments data was shared with</div>',
+
+        '<h2>Section 11: Right to Erasure</h2><h3>When Data Principal Can Request Erasure:</h3><ul><li>Consent is withdrawn</li><li>Purpose of processing fulfilled</li><li>Personal data no longer necessary</li></ul><h3>When You CANNOT Erase:</h3><div class="danger-box"><ul><li>Required by law to retain (GFR, Income Tax Act, etc.)</li><li>Needed for legal proceedings</li><li>Required for compliance obligations</li><li>For legitimate public interest archival purposes</li></ul><strong>Must inform Data Principal WHY erasure not possible</strong></div><h3>Process:</h3><ol><li>Receive erasure request</li><li>Check legal retention requirements</li><li>If can erase: Delete from all systems</li><li>If cannot: Inform reason</li><li>Confirm within reasonable period</li></ol>',
+
+        "<h2>Section 11: Right to Grievance Redressal</h2><h3>Grievance Mechanism Requirements:</h3><table><tr><th>Component</th><th>Details</th></tr><tr><td><strong>Grievance Officer</strong></td><td>Appointed, Contact details published</td></tr><tr><td><strong>Submission</strong></td><td>Online portal, Email, Written</td></tr><tr><td><strong>Acknowledgment</strong></td><td>Within 7 days with ticket number</td></tr><tr><td><strong>Investigation</strong></td><td>Days 8-25</td></tr><tr><td><strong>Resolution</strong></td><td>Within 30 days total</td></tr><tr><td><strong>Escalation</strong></td><td>To Data Protection Board if unresolved</td></tr></table><h3>Common Grievances:</h3><ul><li>Access request not responded</li><li>Correction not made</li><li>Consent withdrawal ignored</li><li>Unauthorized processing</li><li>Data breach not notified</li></ul>",
+
+        '<h2>Section 11: Right to Nominate</h2><h3>What is This Right?</h3><div class="info-box">Data Principal can nominate another individual to exercise her rights in case of:<ul><li>Death</li><li>Incapacity</li></ul></div><h3>Your Obligations:</h3><ul><li>Provide nomination facility</li><li>Maintain nomination records</li><li>Allow nominee to exercise rights</li><li>Verify nominee identity and authority</li></ul><h3>Process:</h3><ol><li>Data Principal submits nomination form</li><li>Specify nominee name and relationship</li><li>Record nomination in system</li><li>Allow changes to nomination anytime</li><li>Honor nomination when triggered</li></ol>',
+
+        '<h2>Section 12: Duties of Data Principal</h2><h3>While Exercising Rights, Data Principal Must:</h3><ul><li>Comply with applicable laws</li><li><strong>Not furnish false information</strong></li><li><strong>Not suppress material information</strong></li><li><strong>Not impersonate another person</strong></li><li><strong>Not register false or frivolous complaints</strong></li></ul><div class="danger-box"><strong>Penalties for Data Principals:</strong><br>If violates above duties: Up to <strong>₹10,000</strong></div><div class="info-box">This ensures Data Principals also act responsibly and don\'t abuse their rights</div>',
+
+        '<h2>Section 13: Rights of Deceased Data Principals</h2><h3>If Data Principal Has Died:</h3><div class="success-box"><strong>Nominee Can Exercise Rights</strong><br>If Data Principal had nominated someone under Section 11, that person can exercise all rights on behalf of deceased</div><div class="info-box"><strong>If No Nominee:</strong><br>Legal heirs can approach Data Protection Board<br>Board may pass appropriate order for exercise of rights</div><h3>Rights That Can Be Exercised:</h3><ul><li>Access to data of deceased</li><li>Correction of inaccurate data</li><li>Erasure of data (subject to legal requirements)</li><li>File grievances regarding deceased\'s data</li></ul>',
+
+        "<h2>Section 14: Incompetent Data Principals</h2><h3>For Persons Unable to Exercise Rights:</h3><div class=\"highlight-box\"><strong>Lawful Guardian Can Exercise Rights</strong><br>On behalf of Data Principal</div><h3>Applies To:</h3><ul><li>Persons of unsound mind</li><li>Persons with disabilities who are unable to exercise rights independently</li></ul><h3>Guardian Must:</h3><ul><li>Prove legal authority (court order, legal document)</li><li>Act in best interest of Data Principal</li><li>Exercise rights on behalf of Data Principal</li></ul><h3>Your Obligation:</h3><ul><li>Verify guardian's legal authority</li><li>Accept guardian's requests</li><li>Process as if from Data Principal herself</li></ul>",
+
+        '<h2>Section 15: Erasure After Purpose Served</h2><h3>Key Principle:</h3><div class="success-box">Data Principal can request erasure of personal data once the purpose for which it was processed is no longer being served</div><h3>Your Obligation:</h3><ul><li>Erase data when purpose fulfilled</li><li>Unless retention necessary for:<ul><li>Compliance with any law</li><li>Legal proceedings</li><li>Legitimate public interest</li></ul></li></ul><h3>Example Scenarios:</h3><table><tr><th>Scenario</th><th>Can Erase?</th></tr><tr><td>Student data after graduation</td><td>✓ Yes (unless needed for alumni/accreditation)</td></tr><tr><td>Application data after rejection</td><td>✓ Yes (after appeal period)</td></tr><tr><td>Beneficiary data after scheme closure</td><td>✗ No (GFR retention required)</td></tr></table>',
+
+        // CHAPTER IV (Slides 32-38)
+        '<h2>Chapter IV: Special Provisions</h2><h3>Sections 16-17 | Duration: 30 minutes</h3><div class="danger-box"><strong>🚨 HIGHEST PROTECTION STANDARDS</strong><br>Children need enhanced protection. Penalties among highest in Act.</div><h3>Two Critical Areas:</h3><table><tr><th>Section</th><th>Topic</th><th>Penalty</th></tr><tr><td>16</td><td>Processing Children\'s Personal Data</td><td>₹250 crores</td></tr><tr><td>17</td><td>Cross-Border Data Transfer</td><td>As applicable</td></tr></table><h3>Impact on Government:</h3><ul><li>Many schemes target children (education, nutrition, health)</li><li>All need parental consent</li><li>International cooperation may involve transfers</li></ul>',
+
+        '<h2>Section 16: Children\'s Data - Overview</h2><h3>👶 Who is a Child?</h3><div class="highlight-box"><strong>Any person below 18 years of age</strong><br>No exceptions, no lower age limit</div><h3>🚫 ABSOLUTELY PROHIBITED:</h3><div class="danger-box"><ul><li>❌ <strong>Tracking</strong> or monitoring child\'s behavior</li><li>❌ <strong>Behavioral monitoring</strong> or profiling</li><li>❌ <strong>Targeted advertising</strong> to children</li><li>❌ Any processing <strong>detrimental to well-being</strong></li></ul><strong style="font-size:1.2em;">Penalty: Up to ₹250 CRORES</strong></div><h3>✅ Mandatory Requirements:</h3><ul><li>Age verification</li><li>Verifiable parental consent</li><li>Enhanced security measures</li></ul>',
+
+        '<h2>Section 16: Parental Consent Process</h2><h3>Step-by-Step Implementation:</h3><ol><li><strong>Age Verification:</strong> Ask date of birth, calculate age</li><li><strong>If Under 18:</strong> Trigger parental consent flow</li><li><strong>Parent Registration:</strong> Request parent email/mobile</li><li><strong>Verification Link:</strong> Send to parent</li><li><strong>Parent Identity:</strong> Verify via OTP + document upload</li><li><strong>Clear Information:</strong> Show what data collected, why</li><li><strong>Explicit Consent:</strong> Parent actively provides consent</li><li><strong>Record:</strong> Parent ID, child ID, timestamp, consent details</li><li><strong>Confirmation:</strong> Send to parent</li><li><strong>Processing:</strong> Can now begin</li></ol><div class="info-box">Document entire process for audit trail</div>',
+
+        "<h2>Section 16: Enhanced Protection Measures</h2><h3>Technical Safeguards:</h3><ul><li>Stronger encryption for children's data</li><li>Separate storage if possible</li><li>Limited access (only authorized personnel)</li><li>Enhanced monitoring and logging</li><li>No behavioral analytics for under-18</li><li>Disable all tracking features</li></ul><h3>Organizational Safeguards:</h3><ul><li>Special training for staff handling children's data</li><li>Background verification (more stringent)</li><li>Parent dashboard for data access</li><li>Easy parent-controlled deletion</li><li>Regular compliance audits</li></ul><div class=\"highlight-box\"><strong>Best Practice:</strong> When in doubt about child's data, err on side of caution and get parental consent</div>",
+
+        "<h2>Section 16: Government Schemes & Children</h2><h3>Examples Requiring Compliance:</h3><table><tr><th>Scheme/Service</th><th>Compliance Requirements</th></tr><tr><td><strong>School Education Portal</strong></td><td>Parental consent, No tracking, Ad-free, Parent access</td></tr><tr><td><strong>Child Nutrition Programs</strong></td><td>Parent consent for health data, Enhanced security</td></tr><tr><td><strong>Immunization Records</strong></td><td>Parent consent, Secure storage, Limited access</td></tr><tr><td><strong>Scholarship for Minors</strong></td><td>Parent/guardian consent, Parent communications</td></tr><tr><td><strong>Educational Apps</strong></td><td>Age gate, Parental consent, No ads, No tracking</td></tr></table>",
+
+        '<h2>Section 17: Cross-Border Data Transfer</h2><h3>Regulation Framework:</h3><div class="highlight-box"><strong>Central Government May Notify:</strong><ul><li>Countries/territories to which data can be transferred</li><li>Restrictions on transfers to specific countries</li></ul><strong>Current Status:</strong> Awaiting government notification</div><h3>Criteria for Approval (Expected):</h3><ul><li>Adequacy of data protection laws</li><li>Effective enforcement mechanism</li><li>International obligations honored</li><li>No national security risks</li><li>Reciprocity in data flows</li></ul><h3>Likely Approved:</h3><ul><li>EU countries (GDPR), UK, Canada, Singapore, Australia, Japan</li></ul>',
+
+        '<h2>Section 17: Transfer Guidelines</h2><h3>Until Notification (Interim Position):</h3><div class="info-box"><strong>Presumption:</strong> Can transfer if:<ul><li>For lawful purpose with consent</li><li>All DPDP provisions complied with</li><li>Adequate safeguards in place</li></ul></div><h3>When Government Transfers Occur:</h3><ul><li>International cooperation (Interpol, UN)</li><li>Diplomatic services (visa processing)</li><li>Disaster response coordination</li><li>Medical emergencies (patient evacuation)</li><li>Educational exchanges</li><li>Research collaborations</li></ul><h3>Safeguards to Implement:</h3><ul><li>Secure transmission (encrypted)</li><li>Contracts with foreign entities</li><li>Purpose limitation clauses</li><li>Audit rights</li><li>Document all transfers</li></ul>',
+
+        // CHAPTER V (Slides 39-45)
+        '<h2>Chapter V: Data Protection Board of India</h2><h3>Sections 18-22 | Duration: 30 minutes</h3><div class="info-box"><strong>🏛️ THE REGULATOR</strong><br>Watchdog ensuring compliance, handling complaints, imposing penalties</div><h3>5 Key Sections:</h3><table><tr><th>Section</th><th>Topic</th></tr><tr><td>18</td><td>Establishment (Notified Nov 13, 2025)</td></tr><tr><td>19</td><td>Functions (monitor, investigate, penalize)</td></tr><tr><td>20</td><td>Powers (summon, inspect, collect evidence)</td></tr><tr><td>21</td><td>Complaints (2-tier process)</td></tr><tr><td>22</td><td>Penalties (up to ₹250 crores)</td></tr></table>',
+
+        '<h2>Section 18: Board Establishment</h2><h3>Data Protection Board of India:</h3><div class="success-box"><strong>Status:</strong> Corporate body (can sue/be sued)<br><strong>Notified:</strong> November 13, 2025<br><strong>Headquarters:</strong> [To be notified]</div><h3>Structure:</h3><table><tr><th>Component</th><th>Details</th></tr><tr><td><strong>Chairperson</strong></td><td>Appointed by Central Government</td></tr><tr><td><strong>Members</strong></td><td>Experts in law, technology, administration</td></tr><tr><td><strong>Officers & Staff</strong></td><td>Administrative and technical personnel</td></tr><tr><td><strong>Regional Offices</strong></td><td>May be established across India</td></tr></table><h3>Budget:</h3><ul><li>Funded by Central Government</li><li>Can retain fees collected</li><li>Financial autonomy</li></ul>',
+
+        "<h2>Section 19: Functions of Board</h2><h3>Core Functions:</h3><table><tr><th>Function</th><th>Details</th></tr><tr><td><strong>1. Compliance Monitoring</strong></td><td>Monitor Data Fiduciaries, Conduct inspections, Issue directions</td></tr><tr><td><strong>2. Complaint Handling</strong></td><td>Receive complaints, Investigate, Pass orders</td></tr><tr><td><strong>3. Penalty Imposition</strong></td><td>Determine violations, Assess gravity, Impose penalties up to ₹250cr</td></tr><tr><td><strong>4. Registration</strong></td><td>Register Consent Managers, Register Data Auditors</td></tr><tr><td><strong>5. Guidelines</strong></td><td>Issue clarifications, Develop best practices, Sectoral guidance</td></tr><tr><td><strong>6. Awareness</strong></td><td>Public campaigns, Training, Research</td></tr></table>",
+
+        "<h2>Section 20: Powers of Board</h2><h3>Investigative Powers:</h3><ul><li>Summon any person for questioning</li><li>Require production of documents/records</li><li>Enter and inspect premises</li><li>Examine witnesses on oath</li><li>Collect evidence from any source</li></ul><h3>Enforcement Powers:</h3><ul><li>Issue directions to Data Fiduciaries</li><li>Impose financial penalties</li><li>Order cessation of processing</li><li>Direct corrective actions</li><li>Award compensation to Data Principals</li></ul><h3>Administrative Powers:</h3><ul><li>Make regulations</li><li>Delegate functions</li><li>Engage experts</li><li>Form committees</li><li>Conduct hearings</li></ul>",
+
+        '<h2>Section 21: Complaint Process</h2><h3>Two-Tier System:</h3><div class="info-box"><strong>Tier 1: Data Fiduciary</strong><br>Complaint to Grievance Officer first (30 days)</div><div class="highlight-box"><strong>Tier 2: Data Protection Board</strong><br>If unresolved, escalate to Board</div><h3>Board Process Timeline:</h3><table><tr><th>Stage</th><th>Timeline</th></tr><tr><td>Filing complaint</td><td>Day 0</td></tr><tr><td>Preliminary assessment</td><td>Days 1-15</td></tr><tr><td>Notice to Data Fiduciary</td><td>Days 16-20</td></tr><tr><td>Response & evidence</td><td>Days 21-45</td></tr><tr><td>Inquiry/hearing</td><td>Days 46-90</td></tr>                <tr><td>Order passed</td><td>Days 91-120</td></tr></table>',
+
+        '<h2>Section 22: Penalty Framework - Complete</h2><h3>Maximum Penalties for Data Fiduciaries:</h3><table><tr><th>Violation</th><th>Section</th><th>Penalty</th></tr><tr style="background:#f8d7da;"><td><strong>Failure to implement security</strong></td><td>8(5)</td><td><strong>₹250cr</strong></td></tr><tr style="background:#f8d7da;"><td><strong>Failure to notify breach</strong></td><td>8(6)</td><td><strong>₹250cr</strong></td></tr><tr style="background:#f8d7da;"><td><strong>Children\'s data violations</strong></td><td>16</td><td><strong>₹250cr</strong></td></tr><tr style="background:#f8d7da;"><td><strong>Non-compliance with Board orders</strong></td><td>21</td><td><strong>₹250cr</strong></td></tr><tr style="background:#fff3cd;"><td>Processing without consent</td><td>5</td><td>₹200cr</td></tr><tr style="background:#fff3cd;"><td>Data minimization violation</td><td>8(2)</td><td>₹200cr</td></tr></table><h3>Factors Considered:</h3><ul><li>Nature & gravity</li><li>Volume & sensitivity</li><li>Harm to Data Principals</li><li>Repetitive nature</li><li>Financial capacity</li></ul>',
+
+        // PRACTICE SECTION (Slides 46-76)
+        "<h2>90-Day Implementation Roadmap</h2><h3>Month 1: Foundation (Days 1-30)</h3><table><tr><th>Week</th><th>Activities</th></tr><tr><td><strong>1-2</strong></td><td>Appoint DPO, Grievance Officer, Form Committee, Leadership briefing</td></tr><tr><td><strong>3-4</strong></td><td>Data inventory, System mapping, Data classification</td></tr></table><h3>Month 2: Policies (Days 31-60)</h3><table><tr><th>Week</th><th>Activities</th></tr><tr><td><strong>5-6</strong></td><td>Draft policies, Design consent forms, Map data flows</td></tr><tr><td><strong>7-8</strong></td><td>Finalize policy, Design grievance portal, Vendor assessment</td></tr></table><h3>Month 3: Systems (Days 61-90)</h3><table><tr><th>Week</th><th>Activities</th></tr><tr><td><strong>9-10</strong></td><td>Launch portal, Security upgrades, Staff training</td></tr><tr><td><strong>11-12</strong></td><td>Compliance audit, Gap remediation, Documentation</td></tr></table>",
+
+        '<h2>Critical Timelines - Quick Reference</h2><table><tr><th>Action</th><th>Timeline</th><th>Priority</th></tr><tr style="background:#f8d7da;"><td>Report breach to CERT-In</td><td><strong>6 hours</strong></td><td>🚨 CRITICAL</td></tr><tr style="background:#f8d7da;"><td>Notify Board of breach</td><td><strong>72 hours</strong></td><td>🚨 CRITICAL</td></tr><tr style="background:#f8d7da;"><td>Notify affected citizens</td><td><strong>Immediately</strong></td><td>🚨 CRITICAL</td></tr><tr style="background:#fff3cd;"><td>Acknowledge grievance</td><td><strong>7 days</strong></td><td>⚠️ Important</td></tr><tr style="background:#fff3cd;"><td>Consent withdrawal</td><td><strong>7 days</strong></td><td>⚠️ Important</td></tr><tr style="background:#fff3cd;"><td>Correction request</td><td><strong>15 days</strong></td><td>⚠️ Important</td></tr><tr><td>Resolve grievance</td><td><strong>30 days</strong></td><td>📅 Standard</td></tr><tr><td>Access request</td><td><strong>30 days</strong></td><td>📅 Standard</td></tr><tr><td>Erasure request</td><td><strong>30 days</strong></td><td>📅 Standard</td></tr></table>',
+
+        "<h2>Case Study 1: Scholarship Portal Breach</h2><h3>📖 Situation:</h3><p>State education portal hacked. 50,000 students' data compromised (Aadhaar, bank details, income certificates).</p><h3>❌ What Went Wrong:</h3><ul><li>No database encryption</li><li>Weak passwords (Password123)</li><li>No 24/7 monitoring</li><li>Breach discovered after 2 weeks</li><li>Didn't notify CERT-In within 6 hours</li><li>Didn't notify Board within 72 hours</li><li>Didn't inform affected students</li></ul><h3>💰 Consequences:</h3><ul><li>Penalty: Up to ₹250 crores</li><li>Students' data misused for fraud</li><li>Massive loss of public trust</li><li>Legal costs, remediation costs</li></ul>",
+
+        "<h2>Case Study 1: What Should Have Been Done</h2><h3>✅ Prevention:</h3><ul><li>End-to-end database encryption</li><li>Strong passwords + MFA for admin accounts</li><li>Regular penetration testing</li><li>24/7 SIEM monitoring with alerts</li><li>Incident response team ready</li></ul><h3>✅ Response (If Breach Occurred):</h3><table><tr><th>Timeline</th><th>Action</th></tr><tr><td><strong>Hour 0-6</strong></td><td>Contain, investigate, notify CERT-In</td></tr><tr><td><strong>Hour 6-72</strong></td><td>Full assessment, notify Board, prepare notifications</td></tr><tr><td><strong>Immediately</strong></td><td>Inform all 50,000 students with protective measures</td></tr><tr><td><strong>Ongoing</strong></td><td>Forensics, fix vulnerabilities, retrain staff</td></tr></table>",
+
+        '<h2>Case Study 2: Excessive Data Collection</h2><h3>📖 Situation:</h3><p>Municipal Corporation requires for birth certificate: Child details ✓, Parents ✓, Grandparents Aadhaar ✗, Income certificate ✗, Caste certificate ✗, Religion ✗</p><h3>❌ Problem:</h3><div class="danger-box"><strong>Violation:</strong> Section 8(2) - Data Minimization<br><strong>Issue:</strong> Collecting unnecessary data<br><strong>Penalty:</strong> Up to ₹200 crores</div><h3>Analysis:</h3><table><tr><th>Data Field</th><th>Status</th></tr><tr><td>Child name, DOB, place</td><td>✓ Necessary</td></tr><tr><td>Parents names, address</td><td>✓ Necessary</td></tr><tr><td>Grandparents details</td><td>✗ Remove</td></tr><tr><td>Income certificate</td><td>✗ Remove</td></tr><tr><td>Caste certificate</td><td>✗ Remove</td></tr></table>',
+
+        '<h2>Case Study 2: Corrective Actions</h2><h3>✅ What Was Done:</h3><ol><li>Reviewed all application forms across services</li><li>For each field asked: "Is this absolutely necessary?"</li><li>Removed unnecessary fields</li><li>Documented justification for remaining fields</li><li>Set up annual review process</li></ol><h3>Results:</h3><div class="success-box"><ul><li>Compliance with Section 8(2)</li><li>Reduced data storage burden</li><li>Lower security risk</li><li>Better citizen experience (faster forms)</li><li>Cost savings (less data to manage)</li></ul></div><h3>Key Learning:</h3><div class="highlight-box"><strong>Ask for each field:</strong> "Can we deliver this service without this data?" If yes, remove it!</div>',
+
+        '<h2>Case Study 3: Educational App Violations</h2><h3>📖 Situation:</h3><p>State govt launches educational app for students aged 10-16. Features: Learning ✓, Quizzes ✓, Social features ✗, Behavioral tracking ✗, Advertisements ✗</p><h3>❌ Violations:</h3><table><tr><th>Violation</th><th>Section</th></tr><tr><td>No parental consent mechanism</td><td>16</td></tr><tr><td>No age verification</td><td>16</td></tr><tr><td>Tracking student behavior</td><td>16</td></tr><tr><td>Targeted advertising</td><td>16</td></tr><tr><td>Student profiling</td><td>16</td></tr></table><div class="danger-box"><strong>Total Penalty Risk:</strong> Up to ₹250 crores PER violation!</div>',
+
+        '<h2>Case Study 3: How It Was Fixed</h2><h3>Phase 1: Immediate (Week 1)</h3><ul><li>Removed ALL advertising</li><li>Disabled behavioral tracking</li><li>Removed social features</li><li>Public notice issued</li></ul><h3>Phase 2: Parental Consent (Weeks 2-4)</h3><ul><li>Age verification implemented</li><li>Parent registration required</li><li>Parent identity verification (OTP + docs)</li><li>Clear consent from verified parents</li><li>Parent dashboard created</li></ul><h3>Phase 3: Enhanced Protection</h3><ul><li>Data minimization applied</li><li>Enhanced encryption</li><li>Limited retention periods</li><li>Quarterly compliance audits</li></ul><div class="success-box">Result: Full compliance with Section 16</div>',
+
+        "<h2>Case Study 4: Consent Withdrawal Ignored</h2><h3>📖 Situation:</h3><p>Citizen subscribed to govt newsletter. After 6 months, submitted consent withdrawal. Department continued sending emails for 3 more months.</p><h3>❌ Violations:</h3><ul><li>Failed to process withdrawal within 7 days</li><li>Continued processing after withdrawal</li><li>No acknowledgment sent</li><li>Citizens rights violated</li></ul><h3>✅ Correct Process:</h3><table><tr><th>Day</th><th>Action</th></tr><tr><td>0</td><td>Receive withdrawal request</td></tr><tr><td>1-2</td><td>Verify identity</td></tr><tr><td>3-5</td><td>Update all systems, stop processing</td></tr><tr><td>6-7</td><td>Send confirmation</td></tr><tr><td>Ongoing</td><td>Maintain withdrawal record</td></tr></table>",
+
+        "<h2>Best Practices Summary</h2><h3>Prevention is Better Than Penalty</h3><table><tr><th>Area</th><th>Best Practice</th></tr><tr><td><strong>Consent</strong></td><td>Clear, simple language. Easy withdrawal. Document everything.</td></tr><tr><td><strong>Security</strong></td><td>Encryption, MFA, 24/7 monitoring, regular audits, staff training</td></tr><tr><td><strong>Data Minimization</strong></td><td>Collect only necessary. Review forms annually. Remove excess fields.</td></tr><tr><td><strong>Children</strong></td><td>Age verification, parental consent, no tracking, no ads, enhanced security</td></tr><tr><td><strong>Timelines</strong></td><td>Set automated reminders at 50%, 75%, 90% of deadline</td></tr><tr><td><strong>Breach Response</strong></td><td>Incident team ready, response plan tested, contact list updated</td></tr><tr><td><strong>Documentation</strong></td><td>Maintain all records: consent, grievances, breaches, training</td></tr></table>",
+
+        '<h2>Common Mistakes to Avoid</h2><h3>Top 10 Compliance Failures:</h3><ol><li><strong>No DPO/Grievance Officer appointed</strong> - Appoint immediately!</li><li><strong>Pre-ticked consent boxes</strong> - User must actively consent</li><li><strong>Collecting excessive data</strong> - Review and minimize</li><li><strong>Weak passwords</strong> - Implement strong policy + MFA</li><li><strong>No breach response plan</strong> - Create and test plan</li><li><strong>Missing timelines</strong> - Set automated reminders</li><li><strong>Ignoring children\'s data rules</strong> - Get parental consent</li><li><strong>No staff training</strong> - Train all personnel</li><li><strong>Delayed breach notification</strong> - Report immediately</li><li><strong>No documentation</strong> - Document everything</li></ol><div class="danger-box"><strong>Any ONE of these can lead to penalties up to ₹250 crores!</strong></div>',
+
+        '<h2>Assessment Quiz - Part 1</h2><h3>Test Your Knowledge (Questions 1-5)</h3><div class="info-box"><strong>Q1.</strong> Maximum penalty for data fiduciaries?<br><strong>Answer: ₹250 crores</strong></div><div class="info-box"><strong>Q2.</strong> Breach notification to Board timeline?<br><strong>Answer: 72 hours</strong></div><div class="info-box"><strong>Q3.</strong> Who is Data Principal?<br><strong>Answer: The citizen whose data is processed</strong></div><div class="info-box"><strong>Q4.</strong> Processing without consent - which NOT valid ground?<br><strong>Answer: Marketing purposes</strong></div><div class="info-box"><strong>Q5.</strong> Children\'s data consent?<br><strong>Answer: Parent or legal guardian consent required</strong></div>',
+
+        '<h2>Assessment Quiz - Part 2</h2><h3>Questions 6-10</h3><div class="info-box"><strong>Q6.</strong> Consent withdrawal processing timeline?<br><strong>Answer: 7 working days</strong></div><div class="info-box"><strong>Q7.</strong> Which principle = collect only necessary data?<br><strong>Answer: Data minimization</strong></div><div class="info-box"><strong>Q8.</strong> What\'s prohibited for children\'s data?<br><strong>Answer: Tracking and targeted advertising</strong></div><div class="info-box"><strong>Q9.</strong> Grievance resolution timeline?<br><strong>Answer: 30 days</strong></div><div class="info-box"><strong>Q10.</strong> Valid consent must be all EXCEPT?<br><strong>Answer: Implied from silence</strong></div><div class="success-box"><strong>Scoring:</strong> 10/10=Excellent | 8-9=Good | 6-7=Review needed | <6=Study again</div>',
+
+        '<h2>Complete Act Summary</h2><table><tr><th>Chapter</th><th>Sections</th><th>Key Points</th></tr><tr><td><strong>I</strong></td><td>1-3</td><td>Definitions, Applicability, Territorial scope</td></tr><tr><td><strong>II</strong></td><td>4-10</td><td>Notice, Consent, 7 obligations, Security, Breach (72h), SDF duties</td></tr><tr><td><strong>III</strong></td><td>11-15</td><td>5 Rights (access, correct, erase, grievance, nominate), Timelines (7-30 days)</td></tr><tr><td><strong>IV</strong></td><td>16-17</td><td>Children (parental consent, no tracking/ads), Cross-border (awaiting notification)</td></tr><tr><td><strong>V</strong></td><td>18-22</td><td>Board (regulator), Complaints (2-tier), Penalties (up to ₹250cr)</td></tr></table><div class="highlight-box"><strong>Remember:</strong> YOU=Fiduciary, Citizens=Principals, Security=Paramount, Children=Extra protection, Timelines=Strict</div>',
+
+        "<h2>Key Numbers to Remember</h2><table><tr><th>Number</th><th>What It Means</th></tr><tr><td><strong>18</strong></td><td>Age below which = child (parental consent needed)</td></tr><tr><td><strong>6 hours</strong></td><td>Report breach to CERT-In</td></tr><tr><td><strong>7 days</strong></td><td>Acknowledge grievance, Process consent withdrawal</td></tr><tr><td><strong>15 days</strong></td><td>Process correction request</td></tr><tr><td><strong>30 days</strong></td><td>Resolve grievance, Access request, Erasure</td></tr><tr><td><strong>72 hours</strong></td><td>Notify Board of breach</td></tr><tr><td><strong>₹10,000</strong></td><td>Max penalty for Data Principals (false info)</td></tr><tr><td><strong>₹200 crores</strong></td><td>Penalty for most violations</td></tr><tr><td><strong>₹250 crores</strong></td><td>Max penalty (security, breach, children, non-compliance)</td></tr></table>",
+
+        '<h2>Dos and Don\'ts Quick Guide</h2><table><tr><th style="width:50%;">✅ DO</th><th style="width:50%;">❌ DON\'T</th></tr><tr><td>Obtain clear, specific consent</td><td>Use pre-ticked boxes</td></tr><tr><td>Collect only necessary data</td><td>Collect excessive data</td></tr><tr><td>Implement strong security</td><td>Use weak passwords</td></tr><tr><td>Encrypt sensitive data</td><td>Store data in plain text</td></tr><tr><td>Notify breaches immediately</td><td>Delay breach notification</td></tr><tr><td>Respond within timelines</td><td>Ignore citizen requests</td></tr><tr><td>Get parental consent for children</td><td>Track or profile children</td></tr><tr><td>Train staff regularly</td><td>Assume everyone knows</td></tr><tr><td>Document everything</td><td>Rely on memory</td></tr><tr><td>Conduct regular audits</td><td>Wait for problems</td></tr></table>',
+
+        "<h2>Resources & Support</h2><h3>Government Resources:</h3><ul><li><strong>MeitY:</strong> www.meity.gov.in | dpdp@meity.gov.in</li><li><strong>Data Protection Board:</strong> [Website TBA]</li><li><strong>CERT-In:</strong> www.cert-in.org.in | incidents@cert-in.org.in | 24x7: +91-11-24368572</li><li><strong>NIC:</strong> Your State/District Centre | www.nic.in</li></ul><h3>Training:</h3><ul><li><strong>iGOT Karmayogi:</strong> igot.gov.in - Govt officers training</li><li><strong>NIELIT:</strong> www.nielit.gov.in - IT certifications</li><li><strong>DSCI:</strong> www.dsci.in - Data protection resources</li></ul><h3>Emergency:</h3><ul><li><strong>Cyber Crime Helpline:</strong> 1930</li><li><strong>Cyber Crime Portal:</strong> cybercrime.gov.in</li></ul>",
+
+        "<h2>Your Action Checklist</h2><h3>Week 1 Actions:</h3><ul><li>☐ Appoint Data Protection Officer</li><li>☐ Appoint Grievance Officer</li><li>☐ Form Data Protection Committee</li><li>☐ Publish contact details</li></ul><h3>Month 1 Actions:</h3><ul><li>☐ Complete data inventory</li><li>☐ Map all data flows</li><li>☐ List all third-party processors</li><li>☐ Begin policy drafting</li></ul><h3>Month 2 Actions:</h3><ul><li>☐ Finalize Data Protection Policy</li><li>☐ Design consent forms</li><li>☐ Set up grievance portal</li><li>☐ Review security measures</li></ul><h3>Month 3 Actions:</h3><ul><li>☐ Launch grievance system</li><li>☐ Implement security upgrades</li><li>☐ Complete staff training</li><li>☐ Conduct compliance audit</li></ul>",
+
+        "<h2>Training & Awareness Strategy</h2><h3>Multi-Level Training:</h3><table><tr><th>Level</th><th>Audience</th><th>Frequency</th><th>Duration</th></tr><tr><td><strong>Level 1</strong></td><td>All Staff</td><td>Annual</td><td>2 hours</td></tr><tr><td><strong>Level 2</strong></td><td>Data Handlers</td><td>Quarterly</td><td>4 hours</td></tr><tr><td><strong>Level 3</strong></td><td>DPO/Grievance Officers</td><td>Monthly</td><td>Ongoing</td></tr><tr><td><strong>Level 4</strong></td><td>Senior Management</td><td>Bi-annual</td><td>3 hours</td></tr></table><h3>Training Topics:</h3><ul><li>DPDP Act overview and obligations</li><li>Consent collection and management</li><li>Security best practices</li><li>Breach response procedures</li><li>Children's data protection</li><li>Timeline compliance</li><li>Case studies and scenarios</li></ul>",
+
+        "<h2>Monitoring & Audit Framework</h2><h3>Monthly Monitoring:</h3><ul><li>Consent collection rate</li><li>Grievances received/resolved</li><li>Average resolution time</li><li>Breaches detected/reported</li><li>Training completion rate</li></ul><h3>Quarterly Internal Audit:</h3><ul><li>Review all processing activities</li><li>Check consent records</li><li>Verify security measures</li><li>Test breach response plan</li><li>Review grievance register</li><li>Assess staff awareness</li></ul><h3>Annual Comprehensive Audit:</h3><ul><li>Full compliance assessment</li><li>External audit (if SDF)</li><li>Gap analysis</li><li>Remediation plan</li><li>Policy updates</li></ul>",
+
+        '<h2>Budget Planning</h2><h3>Estimated Costs (Medium Dept):</h3><table><tr><th>Category</th><th>One-Time</th><th>Annual</th></tr><tr><td><strong>Technology</strong></td><td>₹10-50L</td><td>₹5-10L</td></tr><tr><td>Consent platform, security, portal</td><td></td><td>AMC, licenses</td></tr><tr><td><strong>Consulting</strong></td><td>₹5-15L</td><td>₹3-8L</td></tr><tr><td>Policy, gap assessment</td><td></td><td>Legal, audits</td></tr><tr><td><strong>Training</strong></td><td>₹2-5L</td><td>₹2-4L</td></tr><tr><td>Materials, programs</td><td></td><td>Refreshers</td></tr><tr><td><strong>Personnel</strong></td><td>-</td><td>₹15-30L</td></tr><tr><td></td><td></td><td>DPO, staff</td></tr><tr><td><strong>TOTAL</strong></td><td>₹17-70L</td><td>₹25-52L</td></tr></table><div class="success-box"><strong>ROI:</strong> Avoiding ONE ₹50cr penalty = 10+ years of compliance investment!</div>',
+
+        "<h2>Success Factors</h2><h3>What Makes Compliance Successful:</h3><ol><li><strong>Leadership Commitment</strong><ul><li>Top management endorsement</li><li>Adequate resources allocated</li><li>Regular reviews</li></ul></li><li><strong>Clear Accountability</strong><ul><li>Defined roles and responsibilities</li><li>Performance metrics</li><li>Consequences for non-compliance</li></ul></li><li><strong>Staff Empowerment</strong><ul><li>Comprehensive training</li><li>Tools and resources</li><li>Support system</li></ul></li><li><strong>Continuous Improvement</strong><ul><li>Learn from incidents</li><li>Adopt best practices</li><li>Stay updated on regulations</li></ul></li></ol>",
+
+        "<h2>Myths vs Reality</h2><table><tr><th>❌ MYTH</th><th>✅ REALITY</th></tr><tr><td>Act only for private companies</td><td>Applies equally to government</td></tr><tr><td>Consent permanent once given</td><td>Can be withdrawn anytime (7 days)</td></tr><tr><td>Small depts exempt</td><td>ALL Data Fiduciaries must comply</td></tr><tr><td>Government doesn't need consent</td><td>Need consent OR legitimate use ground</td></tr><tr><td>Can't afford compliance</td><td>Can't afford NON-compliance (₹250cr)</td></tr><tr><td>Only IT dept responsibility</td><td>Everyone who handles data responsible</td></tr><tr><td>One-time exercise</td><td>Ongoing continuous process</td></tr></table>",
+
+        "<h2>Data Protection Impact Assessment (DPIA)</h2><h3>When DPIA Required (for SDFs):</h3><ul><li>Before processing involving high risk to Data Principals</li><li>When introducing new technologies</li><li>Large-scale processing of sensitive data</li><li>Systematic monitoring</li></ul><h3>DPIA Must Include:</h3><table><tr><th>Component</th><th>Details</th></tr><tr><td><strong>Description</strong></td><td>Nature, scope, context, purpose of processing</td></tr><tr><td><strong>Necessity Assessment</strong></td><td>Is processing necessary for purpose?</td></tr><tr><td><strong>Risk Assessment</strong></td><td>Identify risks to Data Principals</td></tr><tr><td><strong>Mitigation Measures</strong></td><td>How risks will be addressed</td></tr><tr><td><strong>Safeguards</strong></td><td>Security and organizational measures</td></tr></table><h3>Benefits:</h3><ul><li>Identify risks early</li><li>Design privacy into systems</li><li>Demonstrate compliance</li><li>Build public trust</li></ul>",
+
+        "<h2>Vendor Management Best Practices</h2><h3>Before Engagement:</h3><table><tr><th>Step</th><th>Action</th></tr><tr><td><strong>1. Due Diligence</strong></td><td>Check security certifications, track record, financial stability</td></tr><tr><td><strong>2. Security Assessment</strong></td><td>Review their security practices, audit reports</td></tr><tr><td><strong>3. References</strong></td><td>Contact existing clients, verify claims</td></tr><tr><td><strong>4. Contract Negotiation</strong></td><td>Include all security and compliance clauses</td></tr></table><h3>Essential Contract Clauses:</h3><ul><li>Scope of processing clearly defined</li><li>Security obligations (encryption, access control)</li><li>Breach notification (immediate)</li><li>Audit rights (quarterly/annual)</li><li>Data return/deletion on termination</li><li>Liability and indemnification</li><li>Compliance with DPDP Act</li><li>Sub-processor restrictions</li></ul><h3>Ongoing Management:</h3><ul><li>Annual security audits</li><li>Quarterly compliance reviews</li><li>Performance monitoring</li></ul>",
+
+        "<h2>Incident Response Team Structure</h2><h3>Team Composition:</h3><table><tr><th>Role</th><th>Responsibilities</th></tr><tr><td><strong>Incident Commander</strong></td><td>Senior officer, Overall coordination, Decision-making authority</td></tr><tr><td><strong>Technical Lead</strong></td><td>IT head, Technical investigation, System containment</td></tr><tr><td><strong>Legal Advisor</strong></td><td>Legal cell, Regulatory compliance, Liability assessment</td></tr><tr><td><strong>Communication Lead</strong></td><td>PR team, Internal/external communications, Media handling</td></tr><tr><td><strong>DPO</strong></td><td>Board liaison, Compliance oversight, Documentation</td></tr></table><h3>Response Phases:</h3><ol><li><strong>Detection:</strong> Identify breach immediately</li><li><strong>Containment:</strong> Isolate affected systems</li><li><strong>Assessment:</strong> Determine scope and impact</li><li><strong>Notification:</strong> CERT-In, Board, citizens</li><li><strong>Investigation:</strong> Root cause analysis</li><li><strong>Remediation:</strong> Fix vulnerabilities</li><li><strong>Review:</strong> Update procedures</li></ol>",
+
+        '<h2>Records Management Requirements</h2><h3>Essential Records to Maintain:</h3><table><tr><th>Record Type</th><th>Contents</th><th>Retention</th></tr><tr><td><strong>Consent Register</strong></td><td>Date, purpose, data collected, method, status</td><td>7 years after withdrawal</td></tr><tr><td><strong>Processing Register</strong></td><td>Types of data, purpose, legal basis, retention period</td><td>Ongoing + 7 years</td></tr><tr><td><strong>Grievance Register</strong></td><td>Complaint details, actions taken, resolution, date</td><td>7 years after closure</td></tr><tr><td><strong>Breach Register</strong></td><td>Date, nature, data affected, notifications sent, remediation</td><td>10 years</td></tr><tr><td><strong>Training Records</strong></td><td>Employee, date, topics, assessment, certification</td><td>Employment + 7 years</td></tr><tr><td><strong>Audit Reports</strong></td><td>Date, findings, recommendations, actions taken</td><td>10 years</td></tr><tr><td><strong>Vendor Contracts</strong></td><td>All DPAs with processors</td><td>Contract term + 7 years</td></tr></table><div class="info-box"><strong>Format:</strong> Maintain both digital and physical copies. Ensure searchable and accessible for Board inspection.</div>',
+
+        '<h2>Future Developments to Watch</h2><h3>Expected Notifications:</h3><ul><li><strong>Rules under the Act</strong> - Detailed procedures, forms, standards</li><li><strong>Countries for cross-border transfer</strong> - Approved destinations</li><li><strong>SDF notification</strong> - Which departments qualify</li><li><strong>Board structure</strong> - Composition, regional offices</li><li><strong>Sectoral guidelines</strong> - Health, education, finance specific rules</li></ul><h3>Stay Updated:</h3><ul><li>Monitor MeitY website regularly</li><li>Subscribe to official notifications</li><li>Attend training workshops</li><li>Join professional networks</li><li>Follow Data Protection Board announcements</li></ul><div class="info-box"><strong>Bookmark:</strong> www.meity.gov.in for latest updates</div>',
+
+        '<h2>Certificate of Completion</h2><div style="border:5px double #667eea;padding:40px;text-align:center;border-radius:15px;"><h3 style="color:#667eea;font-size:2em;margin-bottom:20px;">🎓 Certificate of Completion</h3><p style="margin:20px 0;">This certifies that</p><h3 style="color:#764ba2;font-size:1.8em;margin:20px 0;">[Participant Name]</h3><p style="margin:15px 0;">[Designation]<br>[Department/Ministry]</p><p style="margin:20px 0;">has successfully completed the</p><h3 style="color:#667eea;margin:20px 0;">Digital Personal Data Protection Act, 2023</h3><h4 style="color:#764ba2;margin:15px 0;">Complete Chapter-wise Training Workshop</h4><div style="margin-top:30px;"><p><strong>Duration:</strong> 4 Hours | 77 Slides</p><p><strong>Coverage:</strong> All 5 Chapters + Practical Implementation</p><p><strong>Date:</strong> [Workshop Date]</p><p><strong>Venue:</strong> [Location]</p></div></div>',
+
+        '<h2>Thank You! 🙏</h2><div style="text-align:center;margin-top:60px;"><h3 style="color:#667eea;font-size:2.5em;margin-bottom:40px;">🛡️ Together We Protect Privacy</h3><div class="success-box" style="text-align:left;margin-top:50px;"><strong>✅ What You\'ve Learned:</strong><ul><li>Complete DPDP Act 2023 (all 5 chapters, all 77 slides)</li><li>Your obligations as Data Fiduciary</li><li>Citizens\' rights and how to fulfill them</li><li>Penalty risks and prevention strategies</li><li>90-day implementation roadmap</li><li>Real case studies and lessons</li><li>Best practices and common mistakes</li></ul></div><div class="info-box" style="text-align:left;margin-top:30px;"><strong>🚀 Next Steps:</strong><ul><li>Appoint DPO & Grievance Officer (Week 1)</li><li>Data inventory (Month 1)</li><li>Draft policies (Month 2)</li><li>Implement systems (Month 3)</li><li>Train all staff</li><li>Continuous monitoring</li></ul></div><div class="highlight-box" style="margin-top:40px;font-size:1.3em;"><strong>May 2027 Compliance Target</strong><br><strong>We Can Do This Together! 🇮🇳</strong></div><p style="margin-top:40px;font-size:1.1em;">Questions? Contact: [Email] | [Phone]</p></div>',
+      ];
+
+      let current = 0;
+      const total = slides.length;
+      let start = Date.now();
+
+      function render() {
+        document.getElementById("content").innerHTML = slides[current];
+        document.getElementById("progress").style.width =
+          ((current + 1) / total) * 100 + "%";
+
+        // Update slide display with animation
+        const slideDisplaySpan = document.getElementById("slideDisplay");
+        slideDisplaySpan.style.animation = "pulse 0.3s ease";
+        slideDisplaySpan.textContent = current + "/76";
+        setTimeout(() => {
+          slideDisplaySpan.style.animation = "";
+        }, 300);
+
+        document.getElementById("slideCounter").textContent = current + "/77";
+        document.getElementById("prevBtn").disabled = current === 0;
+        document.getElementById("nextBtn").disabled = current === total - 1;
+        updateChapters();
+        window.scrollTo(0, 0);
+      }
+
+      function updateChapters() {
+        const btns = document.querySelectorAll(".chapter-btn");
+        btns.forEach((b) => b.classList.remove("active"));
+        if (current === 0) btns[0].classList.add("active");
+        else if (current >= 1 && current < 9) btns[1].classList.add("active");
+        else if (current >= 9 && current < 23) btns[2].classList.add("active");
+        else if (current >= 23 && current < 32) btns[3].classList.add("active");
+        else if (current >= 32 && current < 39) btns[4].classList.add("active");
+        else if (current >= 39 && current < 46) btns[5].classList.add("active");
+        else btns[6].classList.add("active");
+      }
+
+      function next() {
+        if (current < total - 1) {
+          current++;
+          render();
+        }
+      }
+
+      function prev() {
+        if (current > 0) {
+          current--;
+          render();
+        }
+      }
+
+      function jumpTo(n) {
+        current = n;
+        render();
+      }
+
+      setInterval(() => {
+        const e = Date.now() - start;
+        const h = Math.floor(e / 3600000);
+        const m = Math.floor((e % 3600000) / 60000);
+        const s = Math.floor((e % 60000) / 1000);
+        document.getElementById("timer").textContent =
+          h.toString().padStart(2, "0") +
+          ":" +
+          m.toString().padStart(2, "0") +
+          ":" +
+          s.toString().padStart(2, "0");
+      }, 1000);
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") next();
+        if (e.key === "ArrowLeft") prev();
+      });
+
+      render();
+    </script>
+  </body>
+</html>
