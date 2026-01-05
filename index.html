@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DPDP Act 2023 - Training for Awareness and Adoption</title>
+    <title>DPDP Act 2023 - Complete Training System</title>
     <style>
       * {
         margin: 0;
@@ -16,6 +16,76 @@
         min-height: 100vh;
         padding: 10px;
       }
+
+      /* Login/Registration Styles */
+      .auth-container {
+        max-width: 450px;
+        margin: 50px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+      .auth-container h2 {
+        color: #667eea;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2em;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+        font-weight: 600;
+      }
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: border-color 0.3s;
+      }
+      .form-group input:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+      .btn-primary {
+        width: 100%;
+        padding: 12px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .btn-primary:hover {
+        background: #764ba2;
+      }
+      .toggle-auth {
+        text-align: center;
+        margin-top: 20px;
+        color: #666;
+      }
+      .toggle-auth a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .toggle-auth a:hover {
+        text-decoration: underline;
+      }
+
+      /* Main App Styles */
       .header {
         background: white;
         padding: 20px;
@@ -23,12 +93,35 @@
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         margin-bottom: 15px;
         text-align: center;
+        position: relative;
       }
       .header h1 {
         color: #667eea;
         font-size: 1.8em;
         margin-bottom: 5px;
       }
+      .user-info {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: #f0f4ff;
+        padding: 8px 15px;
+        border-radius: 8px;
+        font-size: 13px;
+        color: #667eea;
+        font-weight: 600;
+      }
+      .logout-btn {
+        background: #dc3545;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin-left: 10px;
+        cursor: pointer;
+        font-size: 12px;
+      }
+
       .controls {
         background: white;
         padding: 15px;
@@ -82,36 +175,33 @@
         background: #ccc;
         cursor: not-allowed;
       }
+
+      .slide-counter-row {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .slide-counter {
+        display: inline-block;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px 40px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 28px;
+        letter-spacing: 3px;
+        box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
+      }
+
       .progress-container {
         background: white;
-        padding: 20px;
+        padding: 15px;
         border-radius: 10px;
         margin-bottom: 15px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-      .slide-display {
-        text-align: center;
-        font-size: 24px;
-        font-weight: 700;
-        color: #667eea;
-        margin-bottom: 15px;
-        letter-spacing: 2px;
-        transition: all 0.3s ease;
-      }
-      .slide-display span {
-        color: #764ba2;
-        font-size: 28px;
-        display: inline-block;
-        transition: transform 0.3s ease;
-      }
-      @keyframes pulse {
-        0%,
-        100% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.1);
-        }
       }
       .progress-bar {
         background: #e0e0e0;
@@ -124,6 +214,7 @@
         height: 100%;
         transition: width 0.5s;
       }
+
       .slide-container {
         background: white;
         padding: 30px;
@@ -207,6 +298,11 @@
         color: #667eea;
         font-size: 14px;
       }
+
+      .hidden {
+        display: none;
+      }
+
       @media (max-width: 768px) {
         .slide-container {
           padding: 20px;
@@ -214,73 +310,300 @@
         .controls {
           flex-direction: column;
         }
-        table {
-          font-size: 0.8em;
+        .user-info {
+          position: static;
+          margin-bottom: 10px;
         }
         .slide-counter {
-          font-size: 18px;
-          padding: 12px 20px;
-          min-width: 100px;
-        }
-        .slide-display {
-          font-size: 20px;
-        }
-        .slide-display span {
-          font-size: 24px;
+          font-size: 22px;
+          padding: 12px 30px;
         }
       }
     </style>
   </head>
   <body>
-    <div class="header">
-      <h1>📜 DPDP Act 2023 - Training for Awareness and Adoption</h1>
-      <p>Digital Personal Data Protection Act - By Ravi Shankar Singh, Head SeMT, Uttarakhand</p>
+    <!-- Login/Registration Screen -->
+    <div id="authScreen">
+      <div class="auth-container">
+        <h2>🛡️ DPDP Act 2023 Training</h2>
+
+        <!-- Login Form -->
+        <div id="loginForm">
+          <div class="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              id="loginEmail"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              id="loginPassword"
+              placeholder="Enter password"
+              required
+            />
+          </div>
+          <button class="btn-primary" onclick="login()">Login</button>
+          <div class="toggle-auth">
+            Don't have an account? <a onclick="showRegister()">Register here</a>
+          </div>
+        </div>
+
+        <!-- Registration Form -->
+        <div id="registerForm" class="hidden">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input
+              type="text"
+              id="regName"
+              placeholder="Enter your full name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Email *</label>
+            <input
+              type="email"
+              id="regEmail"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Password *</label>
+            <input
+              type="password"
+              id="regPassword"
+              placeholder="Create password"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Designation *</label>
+            <input
+              type="text"
+              id="regDesignation"
+              placeholder="e.g., Section Officer"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Department/Ministry *</label>
+            <input
+              type="text"
+              id="regDepartment"
+              placeholder="Enter your department"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>State *</label>
+            <select id="regState" required>
+              <option value="">Select State</option>
+              <option value="Andhra Pradesh">Andhra Pradesh</option>
+              <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+              <option value="Assam">Assam</option>
+              <option value="Bihar">Bihar</option>
+              <option value="Chhattisgarh">Chhattisgarh</option>
+              <option value="Goa">Goa</option>
+              <option value="Gujarat">Gujarat</option>
+              <option value="Haryana">Haryana</option>
+              <option value="Himachal Pradesh">Himachal Pradesh</option>
+              <option value="Jharkhand">Jharkhand</option>
+              <option value="Karnataka">Karnataka</option>
+              <option value="Kerala">Kerala</option>
+              <option value="Madhya Pradesh">Madhya Pradesh</option>
+              <option value="Maharashtra">Maharashtra</option>
+              <option value="Manipur">Manipur</option>
+              <option value="Meghalaya">Meghalaya</option>
+              <option value="Mizoram">Mizoram</option>
+              <option value="Nagaland">Nagaland</option>
+              <option value="Odisha">Odisha</option>
+              <option value="Punjab">Punjab</option>
+              <option value="Rajasthan">Rajasthan</option>
+              <option value="Sikkim">Sikkim</option>
+              <option value="Tamil Nadu">Tamil Nadu</option>
+              <option value="Telangana">Telangana</option>
+              <option value="Tripura">Tripura</option>
+              <option value="Uttar Pradesh">Uttar Pradesh</option>
+              <option value="Uttarakhand">Uttarakhand</option>
+              <option value="West Bengal">West Bengal</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Central Government">Central Government</option>
+            </select>
+          </div>
+          <button class="btn-primary" onclick="register()">Register</button>
+          <div class="toggle-auth">
+            Already have an account? <a onclick="showLogin()">Login here</a>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="controls">
-      <div class="chapter-nav">
-        <button class="chapter-btn active" onclick="jumpTo(0)">Start</button>
-        <button class="chapter-btn" onclick="jumpTo(1)">Ch I</button>
-        <button class="chapter-btn" onclick="jumpTo(9)">Ch II</button>
-        <button class="chapter-btn" onclick="jumpTo(23)">Ch III</button>
-        <button class="chapter-btn" onclick="jumpTo(32)">Ch IV</button>
-        <button class="chapter-btn" onclick="jumpTo(39)">Ch V</button>
-        <button class="chapter-btn" onclick="jumpTo(46)">Practice</button>
+
+    <!-- Main Training Screen -->
+    <div id="mainScreen" class="hidden">
+      <div class="header">
+        <div class="user-info" id="userInfo">
+          <span id="userName"></span>
+          <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+        <h1>📜 DPDP Act 2023 - Training for Awareness and Adoption</h1>
+        <p>
+          Digital Personal Data Protection Act - By Ravi Shankar Singh, Head
+          SeMT, Uttarakhand
+        </p>
       </div>
-      <div class="timer" id="timer">00:00:00</div>
-      <div style="display: flex; gap: 10px">
-        <button class="nav-btn" onclick="prev()" id="prevBtn">← Prev</button>
-        <button class="nav-btn" onclick="next()" id="nextBtn">Next →</button>
+
+      <div class="controls">
+        <div class="chapter-nav">
+          <button class="chapter-btn active" onclick="jumpTo(0)">Start</button>
+          <button class="chapter-btn" onclick="jumpTo(1)">Ch I</button>
+          <button class="chapter-btn" onclick="jumpTo(9)">Ch II</button>
+          <button class="chapter-btn" onclick="jumpTo(24)">Ch III</button>
+          <button class="chapter-btn" onclick="jumpTo(34)">Ch IV</button>
+          <button class="chapter-btn" onclick="jumpTo(41)">Ch V</button>
+          <button class="chapter-btn" onclick="jumpTo(49)">Practice</button>
+        </div>
+        <div class="timer" id="timer">00:00:00</div>
+        <div style="display: flex; gap: 10px">
+          <button class="nav-btn" onclick="prev()" id="prevBtn">← Prev</button>
+          <button class="nav-btn" onclick="next()" id="nextBtn">Next →</button>
+        </div>
       </div>
+
+      <div class="slide-counter-row">
+        <div class="slide-counter" id="slideCounter">0 / 76</div>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <div class="slide-container" id="content"></div>
     </div>
-    <div class="progress-container">
-      <div class="slide-display">
-        Slide: <span id="slideDisplay">0/76</span>
-      </div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="progress" style="width: 0%"></div>
-      </div>
-    </div>
-    <div class="slide-container" id="content"></div>
+
     <script>
+      // User data storage (in-memory)
+      let users = {};
+      let currentUser = null;
+
+      // Show/hide forms
+      function showLogin() {
+        document.getElementById("loginForm").classList.remove("hidden");
+        document.getElementById("registerForm").classList.add("hidden");
+      }
+
+      function showRegister() {
+        document.getElementById("loginForm").classList.add("hidden");
+        document.getElementById("registerForm").classList.remove("hidden");
+      }
+
+      // Registration
+      function register() {
+        const name = document.getElementById("regName").value.trim();
+        const email = document
+          .getElementById("regEmail")
+          .value.trim()
+          .toLowerCase();
+        const password = document.getElementById("regPassword").value;
+        const designation = document
+          .getElementById("regDesignation")
+          .value.trim();
+        const department = document
+          .getElementById("regDepartment")
+          .value.trim();
+        const state = document.getElementById("regState").value;
+
+        if (
+          !name ||
+          !email ||
+          !password ||
+          !designation ||
+          !department ||
+          !state
+        ) {
+          alert("Please fill all required fields");
+          return;
+        }
+
+        if (users[email]) {
+          alert("User already exists. Please login.");
+          showLogin();
+          return;
+        }
+
+        users[email] = {
+          name,
+          email,
+          password,
+          designation,
+          department,
+          state,
+          registeredOn: new Date().toISOString(),
+        };
+
+        alert("Registration successful! Please login.");
+        showLogin();
+        document.getElementById("loginEmail").value = email;
+      }
+
+      // Login
+      function login() {
+        const email = document
+          .getElementById("loginEmail")
+          .value.trim()
+          .toLowerCase();
+        const password = document.getElementById("loginPassword").value;
+
+        if (!email || !password) {
+          alert("Please enter email and password");
+          return;
+        }
+
+        if (!users[email]) {
+          alert("User not found. Please register first.");
+          return;
+        }
+
+        if (users[email].password !== password) {
+          alert("Incorrect password");
+          return;
+        }
+
+        currentUser = users[email];
+        document.getElementById("authScreen").classList.add("hidden");
+        document.getElementById("mainScreen").classList.remove("hidden");
+        document.getElementById("userName").textContent = currentUser.name;
+        startTimer();
+        render();
+      }
+
+      // Logout
+      function logout() {
+        if (confirm("Are you sure you want to logout?")) {
+          currentUser = null;
+          document.getElementById("mainScreen").classList.add("hidden");
+          document.getElementById("authScreen").classList.remove("hidden");
+          clearInterval(timerInterval);
+        }
+      }
+
+      // Slides array (all 77 slides)
       const slides = [
-        // Slide 0
         '<h2>DPDP Act 2023 - Complete Training</h2><div style="text-align:center;margin-top:80px;"><h3 style="color:#667eea;font-size:2em;">Digital Personal Data Protection Act, 2023</h3><p style="font-size:1.4em;margin-top:30px;">Complete Chapter-wise Training - 77 Slides</p><div class="info-box" style="margin-top:50px;text-align:left;"><strong>📚 Full Coverage:</strong><ul><li>Chapter I: Preliminary (Sections 1-3) - 8 slides</li><li>Chapter II: Obligations (Sections 4-10) - 14 slides</li><li>Chapter III: Rights & Duties (Sections 11-15) - 9 slides</li><li>Chapter IV: Special Provisions (Sections 16-17) - 7 slides</li><li>Chapter V: Data Protection Board (Sections 18-22) - 7 slides</li><li>Practice, Case Studies & Assessment - 32 slides</li></ul></div></div>',
-
-        // CHAPTER I (Slides 1-8)
         '<h2>Chapter I: Preliminary</h2><h3>Sections 1-3 | Duration: 15 minutes</h3><div class="highlight-box"><strong>Learning Objectives:</strong><ul><li>Understand short title and commencement</li><li>Master all key definitions</li><li>Know application scope</li></ul></div><h3>Sections Covered:</h3><ul><li>Section 1: Short title, commencement</li><li>Section 2: All definitions (a-s)</li><li>Section 3: Application and territorial scope</li></ul>',
-
         '<h2>Section 1: Short Title & Commencement</h2><div class="success-box"><strong>The Digital Personal Data Protection Act, 2023</strong><p>Act No. 22 of 2023 | Presidential Assent: August 11, 2023</p></div><h3>Implementation Status</h3><table><tr><th>Status</th><th>Provisions</th><th>Date</th></tr><tr><td>✅ Notified</td><td>Data Protection Board establishment</td><td>November 13, 2025</td></tr><tr><td>⏳ Pending</td><td>Main provisions (consent, obligations, rights)</td><td>Expected by May 2027</td></tr></table><div class="info-box"><strong>What this means:</strong> Board operational. Main compliance obligations awaiting notification. Prepare now!</div>',
-
         '<h2>Section 2: Personal Data Defined</h2><div class="highlight-box"><strong>Definition:</strong> Any data about an individual who is identifiable by or in relation to such data</div><h3>Examples of Personal Data:</h3><table><tr><th>Category</th><th>Examples</th></tr><tr><td><strong>Identification Data</strong></td><td>Name, Aadhaar, PAN, Passport, Voter ID</td></tr><tr><td><strong>Contact Data</strong></td><td>Phone, Email, Postal address</td></tr><tr><td><strong>Financial Data</strong></td><td>Bank account, Credit card, Income details</td></tr><tr><td><strong>Biometric Data</strong></td><td>Fingerprints, Iris scan, Face recognition</td></tr><tr><td><strong>Digital Identifiers</strong></td><td>IP address, Device ID, Location data</td></tr></table><div class="info-box"><strong>Digital Personal Data:</strong> Personal data in digital form</div>',
-
         '<h2>Section 2: The Key Players</h2><h3>🎯 Data Principal = THE CITIZEN</h3><div class="success-box"><strong>WHO:</strong> Individual to whom personal data relates<br><strong>REFERRED AS:</strong> "She" in the Act<br><strong>ROLE:</strong> Has RIGHTS (access, correct, erase, complain)</div><h3>🏢 Data Fiduciary = YOUR DEPARTMENT</h3><div class="danger-box"><strong>WHO:</strong> Determines purpose & means of processing<br><strong>ROLE:</strong> Has OBLIGATIONS (consent, security, breach notification)<br><strong>LIABILITY:</strong> Up to ₹250 crores for violations<br><strong>DECIDES:</strong> WHY and HOW to process data</div><div class="highlight-box"><strong>⚠️ Remember:</strong> YOU are Data Fiduciary. Citizens are Data Principals. Greater power = Greater responsibility!</div>',
-
         '<h2>Section 2: Data Processor & Processing</h2><h3>⚙️ Data Processor</h3><div class="info-box"><strong>Definition:</strong> Processes data on behalf of Data Fiduciary<br><strong>Examples:</strong> NIC, IT vendors, cloud providers, BPO services<br><strong>⚠️ CRITICAL:</strong> YOU remain responsible even if processor fails!</div><h3>📝 Processing</h3><p><strong>Definition:</strong> Any operation on digital personal data</p><table><tr><th>Operation</th><th>Examples</th></tr><tr><td>Collection</td><td>Form submission, biometric capture</td></tr><tr><td>Storage</td><td>Saving in servers, cloud, backups</td></tr><tr><td>Use</td><td>Verification, analysis, decisions</td></tr><tr><td>Disclosure/Sharing</td><td>Sending to other departments</td></tr><tr><td>Erasure</td><td>Deletion, destruction</td></tr></table>',
-
         '<h2>Section 2: Consent - The Gold Standard</h2><h3>Valid Consent Must Be:</h3><table><tr><th>Element</th><th>Meaning</th><th>Example</th></tr><tr><td><strong>FREE</strong></td><td>Voluntary, no coercion</td><td>✓ Can refuse<br>✗ "Provide or lose benefit"</td></tr><tr><td><strong>SPECIFIC</strong></td><td>For each purpose</td><td>✓ Separate for email, SMS<br>✗ "For all purposes"</td></tr><tr><td><strong>INFORMED</strong></td><td>Clear explanation</td><td>✓ Plain language notice<br>✗ Complex legal text</td></tr><tr><td><strong>UNCONDITIONAL</strong></td><td>Not bundled</td><td>✓ Can use without consent<br>✗ Must consent to access</td></tr><tr><td><strong>UNAMBIGUOUS</strong></td><td>Clear action</td><td>✓ User clicks checkbox<br>✗ Pre-ticked box</td></tr></table><div class="danger-box"><strong>❌ Invalid:</strong> Pre-ticked boxes, implied from silence, bundled with service</div>',
-
         '<h2>Section 2: Special Categories</h2><h3>👶 Child (Below 18 years)</h3><div class="danger-box"><strong>Requirements:</strong><ul><li>Verifiable parental consent mandatory</li><li>Age verification needed</li><li>Parent identity must be verified</li></ul><strong>Prohibited:</strong><ul><li>❌ Tracking behavior</li><li>❌ Profiling/monitoring</li><li>❌ Targeted advertising</li></ul><strong>Penalty:</strong> Up to ₹250 crores</div><h3>⚡ Significant Data Fiduciary (SDF)</h3><div class="info-box"><strong>Who:</strong> Notified by govt (volume, sensitivity, impact)<br><strong>Extra Duties:</strong> Appoint DPO, DPIA, audits, enhanced security</div>',
-
         '<h2>Section 3: Application of the Act</h2><h3>📍 When Does Act Apply?</h3><div class="success-box"><strong>1. Processing WITHIN INDIA</strong><br>All digital personal data processing in India, regardless of Data Principal location<br><br><strong>2. Processing OUTSIDE INDIA</strong><br>If offering goods/services to Data Principals in India</div><h3>❌ Exclusions (NOT Covered):</h3><ul><li>Personal/domestic purposes by individuals</li><li>Publicly available personal data</li><li>Data made public by Data Principal</li><li>Non-digital data never digitized</li></ul><div class="highlight-box"><strong>🎯 Takeaway:</strong> If you process digital personal data of individuals in India for official purposes, Act applies. No exceptions!</div>',
 
         // CHAPTER II (Slides 9-22)
@@ -420,32 +743,46 @@
 
         '<h2>Future Developments to Watch</h2><h3>Expected Notifications:</h3><ul><li><strong>Rules under the Act</strong> - Detailed procedures, forms, standards</li><li><strong>Countries for cross-border transfer</strong> - Approved destinations</li><li><strong>SDF notification</strong> - Which departments qualify</li><li><strong>Board structure</strong> - Composition, regional offices</li><li><strong>Sectoral guidelines</strong> - Health, education, finance specific rules</li></ul><h3>Stay Updated:</h3><ul><li>Monitor MeitY website regularly</li><li>Subscribe to official notifications</li><li>Attend training workshops</li><li>Join professional networks</li><li>Follow Data Protection Board announcements</li></ul><div class="info-box"><strong>Bookmark:</strong> www.meity.gov.in for latest updates</div>',
 
-        '<h2>Certificate of Completion</h2><div style="border:5px double #667eea;padding:40px;text-align:center;border-radius:15px;"><h3 style="color:#667eea;font-size:2em;margin-bottom:20px;">🎓 Certificate of Completion</h3><p style="margin:20px 0;">This certifies that</p><h3 style="color:#764ba2;font-size:1.8em;margin:20px 0;">[Participant Name]</h3><p style="margin:15px 0;">[Designation]<br>[Department/Ministry]</p><p style="margin:20px 0;">has successfully completed the</p><h3 style="color:#667eea;margin:20px 0;">Digital Personal Data Protection Act, 2023</h3><h4 style="color:#764ba2;margin:15px 0;">Complete Chapter-wise Training Workshop</h4><div style="margin-top:30px;"><p><strong>Duration:</strong> 4 Hours | 77 Slides</p><p><strong>Coverage:</strong> All 5 Chapters + Practical Implementation</p><p><strong>Date:</strong> [Workshop Date]</p><p><strong>Venue:</strong> [Location]</p></div></div>',
-
-        '<h2>Thank You! 🙏</h2><div style="text-align:center;margin-top:60px;"><h3 style="color:#667eea;font-size:2.5em;margin-bottom:40px;">🛡️ Together We Protect Privacy</h3><div class="success-box" style="text-align:left;margin-top:50px;"><strong>✅ What You\'ve Learned:</strong><ul><li>Complete DPDP Act 2023 (all 5 chapters, all 77 slides)</li><li>Your obligations as Data Fiduciary</li><li>Citizens\' rights and how to fulfill them</li><li>Penalty risks and prevention strategies</li><li>90-day implementation roadmap</li><li>Real case studies and lessons</li><li>Best practices and common mistakes</li></ul></div><div class="info-box" style="text-align:left;margin-top:30px;"><strong>🚀 Next Steps:</strong><ul><li>Appoint DPO & Grievance Officer (Week 1)</li><li>Data inventory (Month 1)</li><li>Draft policies (Month 2)</li><li>Implement systems (Month 3)</li><li>Train all staff</li><li>Continuous monitoring</li></ul></div><div class="highlight-box" style="margin-top:40px;font-size:1.3em;"><strong>May 2027 Compliance Target</strong><br><strong>We Can Do This Together! 🇮🇳</strong></div><p style="margin-top:40px;font-size:1.1em;">Questions? Contact: imsinghrs[at]gmail[dot]com </p></div>',
+        '<h2>Certificate of Completion</h2><div style="border:5px double #667eea;padding:40px;text-align:center;border-radius:15px;"><h3 style="color:#667eea;font-size:2em;margin-bottom:20px;">🎓 Certificate of Completion</h3><p style="margin:20px 0;">This certifies that</p><h3 style="color:#764ba2;font-size:1.8em;margin:20px 0;" id="certName">[Name]</h3><p style="margin:15px 0;" id="certDesignation">[Designation]</p><p style="margin:15px 0;" id="certDepartment">[Department]</p><p style="margin:15px 0;" id="certState">[State]</p><p style="margin:20px 0;">has successfully completed the</p><h3 style="color:#667eea;margin:20px 0;">Digital Personal Data Protection Act, 2023</h3><h4 style="color:#764ba2;margin:15px 0;">Complete Chapter-wise Training Workshop</h4><div style="margin-top:30px;"><p><strong>Duration:</strong> 4 Hours | 77 Slides</p><p><strong>Coverage:</strong> All 5 Chapters + Practical Implementation</p><p><strong>Completed on:</strong> <span id="certDate"></span></p><p><strong>Session Time:</strong> <span id="certDuration"></span></p></div></div>',
+        '<h2>Thank You! 🙏</h2><div style="text-align:center;margin-top:60px;"><h3 style="color:#667eea;font-size:2.5em;margin-bottom:40px;">🛡️ Together We Protect Privacy</h3><div class="success-box" style="text-align:left;margin-top:50px;"><strong>✅ Training Complete, <span id="userName2"></span>!</strong><ul><li>You have completed all 77 slides</li><li>Certificate generated with your details</li><li>Total session time tracked</li><li>Ready to implement DPDP compliance</li></ul></div><div class="highlight-box" style="margin-top:40px;font-size:1.3em;"><strong>May 2027 Compliance Target</strong><br><strong>We Can Do This Together! 🇮🇳</strong></div><p style="margin-top:40px;">Download your certificate and share with your department</p></div>',
       ];
 
       let current = 0;
-      const total = slides.length;
+      const total = 76;
       let start = Date.now();
+      let timerInterval;
 
       function render() {
         document.getElementById("content").innerHTML = slides[current];
         document.getElementById("progress").style.width =
           ((current + 1) / total) * 100 + "%";
-
-        // Update slide display with animation
-        const slideDisplaySpan = document.getElementById("slideDisplay");
-        slideDisplaySpan.style.animation = "pulse 0.3s ease";
-        slideDisplaySpan.textContent = current + "/76";
-        setTimeout(() => {
-          slideDisplaySpan.style.animation = "";
-        }, 300);
-
-        document.getElementById("slideCounter").textContent = current + "/77";
+        document.getElementById("slideCounter").textContent = current + " / 76";
         document.getElementById("prevBtn").disabled = current === 0;
         document.getElementById("nextBtn").disabled = current === total - 1;
         updateChapters();
+
+        // Update certificate if on certificate slide (slide 75)
+        if (current === 75 && currentUser) {
+          document.getElementById("certName").textContent = currentUser.name;
+          document.getElementById("certDesignation").textContent =
+            currentUser.designation;
+          document.getElementById("certDepartment").textContent =
+            currentUser.department;
+          document.getElementById("certState").textContent = currentUser.state;
+          document.getElementById("certDate").textContent =
+            new Date().toLocaleDateString();
+          const duration = Math.floor((Date.now() - start) / 1000);
+          const hours = Math.floor(duration / 3600);
+          const minutes = Math.floor((duration % 3600) / 60);
+          document.getElementById("certDuration").textContent =
+            hours + "h " + minutes + "m";
+        }
+
+        // Update thank you slide (slide 76)
+        if (current === 76 && currentUser) {
+          document.getElementById("userName2").textContent = currentUser.name;
+        }
+
         window.scrollTo(0, 0);
       }
 
@@ -454,10 +791,10 @@
         btns.forEach((b) => b.classList.remove("active"));
         if (current === 0) btns[0].classList.add("active");
         else if (current >= 1 && current < 9) btns[1].classList.add("active");
-        else if (current >= 9 && current < 23) btns[2].classList.add("active");
-        else if (current >= 23 && current < 32) btns[3].classList.add("active");
-        else if (current >= 32 && current < 39) btns[4].classList.add("active");
-        else if (current >= 39 && current < 46) btns[5].classList.add("active");
+        else if (current >= 9 && current < 24) btns[2].classList.add("active");
+        else if (current >= 24 && current < 34) btns[3].classList.add("active");
+        else if (current >= 34 && current < 41) btns[4].classList.add("active");
+        else if (current >= 41 && current < 49) btns[5].classList.add("active");
         else btns[6].classList.add("active");
       }
 
@@ -476,29 +813,31 @@
       }
 
       function jumpTo(n) {
+        console.log("Current " + current);
         current = n;
+        console.log("slide number " + n);
         render();
       }
 
-      setInterval(() => {
-        const e = Date.now() - start;
-        const h = Math.floor(e / 3600000);
-        const m = Math.floor((e % 3600000) / 60000);
-        const s = Math.floor((e % 60000) / 1000);
-        document.getElementById("timer").textContent =
-          h.toString().padStart(2, "0") +
-          ":" +
-          m.toString().padStart(2, "0") +
-          ":" +
-          s.toString().padStart(2, "0");
-      }, 1000);
+      function startTimer() {
+        timerInterval = setInterval(() => {
+          const e = Date.now() - start;
+          const h = Math.floor(e / 3600000);
+          const m = Math.floor((e % 3600000) / 60000);
+          const s = Math.floor((e % 60000) / 1000);
+          document.getElementById("timer").textContent =
+            h.toString().padStart(2, "0") +
+            ":" +
+            m.toString().padStart(2, "0") +
+            ":" +
+            s.toString().padStart(2, "0");
+        }, 1000);
+      }
 
       document.addEventListener("keydown", (e) => {
         if (e.key === "ArrowRight") next();
         if (e.key === "ArrowLeft") prev();
       });
-
-      render();
     </script>
   </body>
 </html>
